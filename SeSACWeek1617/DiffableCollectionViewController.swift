@@ -6,18 +6,18 @@
 //
 
 import UIKit
+import Kingfisher
 
 class DiffableCollectionViewController: UIViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var searchBar: UISearchBar!
     
-    var list = ["아이폰", "아이패드", "에어팟", "맥북", "애플워치"]
+    var viewModel = DiffableViewModel()
     
     // Int: String:
-    private var dataSource: UICollectionViewDiffableDataSource<Int, String>!
-    
-    
+    private var dataSource: UICollectionViewDiffableDataSource<Int, SearchResult>!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,26 +27,31 @@ class DiffableCollectionViewController: UIViewController {
         collectionView.delegate = self
         
         searchBar.delegate = self
+        
+        viewModel.photoList.bind { photo in
+            var snapshot = NSDiffableDataSourceSnapshot<Int, SearchResult>()
+            snapshot.appendSections([0])
+            snapshot.appendItems(photo.results)
+            self.dataSource.apply(snapshot)
+        }
     }
 
 }
 
 extension DiffableCollectionViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let item = dataSource.itemIdentifier(for: indexPath) else { return }
+//        guard let item = dataSource.itemIdentifier(for: indexPath) else { return }
         
-        let alert = UIAlertController(title: item, message: "click", preferredStyle: .alert)
-        let ok = UIAlertAction(title: "ok", style: .cancel)
-        alert.addAction(ok)
-        present(alert, animated: true)
+//        let alert = UIAlertController(title: item, message: "click", preferredStyle: .alert)
+//        let ok = UIAlertAction(title: "ok", style: .cancel)
+//        alert.addAction(ok)
+//        present(alert, animated: true)
     }
 }
 
 extension DiffableCollectionViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        var snapshot = dataSource.snapshot()
-        snapshot.appendItems([searchBar.text!])
-        dataSource.apply(snapshot, animatingDifferences: true)
+        viewModel.requestSearchPhoto(query: searchBar.text!)
     }
 }
 
@@ -58,11 +63,22 @@ extension DiffableCollectionViewController {
     }
     
     private func configureDataSource() {
-        let cellRegisteration = UICollectionView.CellRegistration<UICollectionViewListCell, String>(handler: { cell, indexPath, itemIdentifier in
+        let cellRegisteration = UICollectionView.CellRegistration<UICollectionViewListCell, SearchResult>(handler: { cell, indexPath, itemIdentifier in
             var content = UIListContentConfiguration.valueCell()
-            content.text = itemIdentifier
-            content.secondaryText = "\(itemIdentifier.count)"
-            cell.contentConfiguration = content
+            content.text = "\(itemIdentifier.likes)"
+            
+            // String -> URL -> Data -> Image
+            DispatchQueue.global().async {
+                let url = URL(string: itemIdentifier.urls.thumb)!
+                let data = try? Data(contentsOf: url)
+                
+                DispatchQueue.main.async {
+                    content.image = UIImage(data: data!)
+                    cell.contentConfiguration = content
+                }
+                
+            }
+            
             
             var background = UIBackgroundConfiguration.listPlainCell()
             background.strokeWidth = 2
@@ -77,10 +93,10 @@ extension DiffableCollectionViewController {
             return cell
         })
         
-        // Initial
-        var snapshot = NSDiffableDataSourceSnapshot<Int, String>()
-        snapshot.appendSections([0])
-        snapshot.appendItems(list)
-        dataSource.apply(snapshot)
+//        // Initial
+//        var snapshot = NSDiffableDataSourceSnapshot<Int, SearchResult>()
+//        snapshot.appendSections([0])
+//        snapshot.appendItems(list)
+//        dataSource.apply(snapshot)
     }
 }
