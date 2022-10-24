@@ -108,11 +108,85 @@ class RxCocoaExampleViewController: UIViewController {
                 self.showAlert()
             }
             .disposed(by: disposeBag)
+        
     }
     
     func setOperator() {
         let itemsA = [3.3, 4.0, 5.0, 2.9, 3.6, 4.8]
         let itemsB = [2.3, 2.0, 1.3]
+        
+        // practice
+        Observable.never()
+            .subscribe {
+                print("never printed here")
+            }
+            .disposed(by: disposeBag)
+        
+        Observable.empty()
+            .subscribe { event in
+                print(event)
+            }
+            .disposed(by: disposeBag)
+        
+        Observable.just("😘")
+            .subscribe { event in
+                print(event)
+            }
+            .disposed(by: disposeBag)
+        
+        let myObservable = { (element: String) -> Observable<String> in
+            return Observable.create { observer in
+                observer.on(.next(element))
+                observer.on(.completed)
+                return Disposables.create()
+            }
+        }
+        myObservable("🧡")
+            .subscribe { print($0) }
+            .disposed(by: disposeBag)
+        
+        Observable.range(start: 1, count: 5) // 1부터 5까지
+            .subscribe { print($0) }
+            .disposed(by: disposeBag)
+        
+        Observable.repeatElement("⭐️")
+            .take(5)
+            .subscribe(onNext: { print($0) })
+            .disposed(by: disposeBag)
+        
+        Observable.generate( // as long as condition true
+                initialState: 0,
+                condition: { $0 < 5 },
+                iterate: { $0 + 1 }
+            )
+            .subscribe(onNext: { print($0) })
+            .disposed(by: disposeBag)
+        
+        Observable.deferred {
+            print("create")
+            return Observable.create { observer in
+                print("emitting")
+                observer.onNext("next")
+                observer.onNext("next2")
+                return Disposables.create()
+            }
+        }
+        .subscribe(onNext: { print($0) })
+        .disposed(by: disposeBag)
+        
+//        Observable<Int>.error(Error.Type)
+//            .subscribe { print($0) }
+//            .disposed(by: disposeBag)
+        
+        Observable.of("1", "2", "3", "4")
+            .do(onNext: { print("Intercepted:", $0) },
+                afterNext: { print("Intercepted after:", $0) },
+                onError: { print("Intercepted Error:", $0)},
+                afterError: { print("Intercepted after Error:", $0)},
+                onCompleted: { print("Completed") },
+                afterCompleted: { print("After Completed") })
+                .subscribe(onNext: { print($0) })
+                .disposed(by: disposeBag)
         
         Observable.just(itemsA)
             .subscribe { value in
@@ -178,6 +252,7 @@ class RxCocoaExampleViewController: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
             intervalObservable.dispose()
         }
+        
     }
     
     func showAlert() {
