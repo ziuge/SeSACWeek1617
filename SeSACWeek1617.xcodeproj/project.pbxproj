@@ -28,6 +28,8 @@
 		DE93015D28FF906800BDC50A /* DiffableCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE93015C28FF906800BDC50A /* DiffableCollectionViewController.swift */; };
 		DEA2BCFB29067F5A00C02179 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = DEA2BCFA29067F5A00C02179 /* RxCocoa */; };
 		DEA2BCFD29067F5A00C02179 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = DEA2BCFC29067F5A00C02179 /* RxSwift */; };
+		DEB604CA29077A67006573F4 /* SubjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB604C929077A67006573F4 /* SubjectViewController.swift */; };
+		DEB604CC290788B2006573F4 /* SubjectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB604CB290788B2006573F4 /* SubjectViewModel.swift */; };
 		DEEA14A9290625B10082BD7C /* RxCocoaExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEEA14A8290625B10082BD7C /* RxCocoaExampleViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -51,6 +53,8 @@
 		DE93015828FF7EAE00BDC50A /* SimpleCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleCollectionViewController.swift; sourceTree = "<group>"; };
 		DE93015A28FF7F3700BDC50A /* SimpleTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleTableViewController.swift; sourceTree = "<group>"; };
 		DE93015C28FF906800BDC50A /* DiffableCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffableCollectionViewController.swift; sourceTree = "<group>"; };
+		DEB604C929077A67006573F4 /* SubjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectViewController.swift; sourceTree = "<group>"; };
+		DEB604CB290788B2006573F4 /* SubjectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectViewModel.swift; sourceTree = "<group>"; };
 		DEEA14A8290625B10082BD7C /* RxCocoaExampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxCocoaExampleViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -123,6 +127,8 @@
 			isa = PBXGroup;
 			children = (
 				DEEA14A8290625B10082BD7C /* RxCocoaExampleViewController.swift */,
+				DEB604C929077A67006573F4 /* SubjectViewController.swift */,
+				DEB604CB290788B2006573F4 /* SubjectViewModel.swift */,
 			);
 			path = Rx;
 			sourceTree = "<group>";
@@ -214,6 +220,7 @@
 				DE9178AB2900ED69006CC5AE /* DiffableViewModel.swift in Sources */,
 				DE9178A32900CF83006CC5AE /* CObservable.swift in Sources */,
 				DE93014928FF7E9000BDC50A /* ViewController.swift in Sources */,
+				DEB604CA29077A67006573F4 /* SubjectViewController.swift in Sources */,
 				DE93015B28FF7F3700BDC50A /* SimpleTableViewController.swift in Sources */,
 				DE9178B12900EF74006CC5AE /* SearchPhoto.swift in Sources */,
 				DE93015D28FF906800BDC50A /* DiffableCollectionViewController.swift in Sources */,
@@ -222,6 +229,7 @@
 				DEEA14A9290625B10082BD7C /* RxCocoaExampleViewController.swift in Sources */,
 				DE9178A92900D783006CC5AE /* News.swift in Sources */,
 				DE9178AD2900EDEB006CC5AE /* APIService.swift in Sources */,
+				DEB604CC290788B2006573F4 /* SubjectViewModel.swift in Sources */,
 				DE9178AF2900EE37006CC5AE /* APIKey.swift in Sources */,
 				DE9178A52900D13A006CC5AE /* NewsViewController.swift in Sources */,
 			);

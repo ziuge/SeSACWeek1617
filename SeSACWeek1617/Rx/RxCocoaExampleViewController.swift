@@ -20,11 +20,22 @@ class RxCocoaExampleViewController: UIViewController {
     @IBOutlet weak var signEmail: UITextField!
     @IBOutlet weak var signButton: UIButton!
     
-    let disposeBag = DisposeBag()
+    @IBOutlet weak var nicknameLabel: UILabel!
+    
+    var disposeBag = DisposeBag()
+    var nickname = Observable.just("Jack")
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        nickname
+            .bind(to: nicknameLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            
+        }
+        
         setTableView()
         setPickerView()
         setSwitch()
@@ -104,9 +115,10 @@ class RxCocoaExampleViewController: UIViewController {
             .disposed(by: disposeBag)
         
         signButton.rx.tap // tap = touchUpInside
-            .subscribe { _ in
-                self.showAlert()
-            }
+            .withUnretained(self)
+            .subscribe(onNext: { vc, _ in
+                vc.showAlert()
+            })
             .disposed(by: disposeBag)
         
     }
@@ -224,8 +236,8 @@ class RxCocoaExampleViewController: UIViewController {
             }
             .disposed(by: disposeBag)
         
-        Observable.repeatElement("Jack")
-            .take(5)
+        Observable.repeatElement("Jack") // Infinite Observable Sequence
+            .take(5) // Finite Observable Sequence
             .subscribe { value in
                 print("repeat - \(value)")
             } onError: { error in
@@ -237,7 +249,7 @@ class RxCocoaExampleViewController: UIViewController {
             }
             .disposed(by: disposeBag)
         
-        let intervalObservable = Observable<Int>.interval(.seconds(1), scheduler: MainScheduler.instance)
+        Observable<Int>.interval(.seconds(1), scheduler: MainScheduler.instance)
             .subscribe { value in
                 print("interval - \(value)")
             } onError: { error in
@@ -247,12 +259,16 @@ class RxCocoaExampleViewController: UIViewController {
             } onDisposed: {
                 print("interval disposed")
             }
-//            .disposed(by: disposeBag)
+            .disposed(by: disposeBag)
+
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+//            self.disposeBag = DisposeBag() // 한번에 리소스 정리
+//        }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-            intervalObservable.dispose()
-        }
-        
+    }
+    
+    deinit {
+        print("RxCocoaExampleViewController")
     }
     
     func showAlert() {
