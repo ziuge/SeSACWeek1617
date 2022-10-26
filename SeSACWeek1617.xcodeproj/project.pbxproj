@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DE3723722908CBB000098DE3 /* SubscribeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3723712908CBB000098DE3 /* SubscribeViewController.swift */; };
 		DE9178A32900CF83006CC5AE /* CObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9178A22900CF83006CC5AE /* CObservable.swift */; };
 		DE9178A52900D13A006CC5AE /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9178A42900D13A006CC5AE /* NewsViewController.swift */; };
 		DE9178A72900D249006CC5AE /* NewsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9178A62900D249006CC5AE /* NewsViewModel.swift */; };
@@ -34,6 +35,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DE3723712908CBB000098DE3 /* SubscribeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribeViewController.swift; sourceTree = "<group>"; };
 		DE9178A22900CF83006CC5AE /* CObservable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CObservable.swift; sourceTree = "<group>"; };
 		DE9178A42900D13A006CC5AE /* NewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViewController.swift; sourceTree = "<group>"; };
 		DE9178A62900D249006CC5AE /* NewsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViewModel.swift; sourceTree = "<group>"; };
@@ -111,6 +113,7 @@
 				DE93015828FF7EAE00BDC50A /* SimpleCollectionViewController.swift */,
 				DE93015A28FF7F3700BDC50A /* SimpleTableViewController.swift */,
 				DE93014A28FF7E9000BDC50A /* Main.storyboard */,
+				DE3723712908CBB000098DE3 /* SubscribeViewController.swift */,
 				DE93015C28FF906800BDC50A /* DiffableCollectionViewController.swift */,
 				DE9178AA2900ED69006CC5AE /* DiffableViewModel.swift */,
 				DE9178AC2900EDEB006CC5AE /* APIService.swift */,
@@ -224,6 +227,7 @@
 				DE93015B28FF7F3700BDC50A /* SimpleTableViewController.swift in Sources */,
 				DE9178B12900EF74006CC5AE /* SearchPhoto.swift in Sources */,
 				DE93015D28FF906800BDC50A /* DiffableCollectionViewController.swift in Sources */,
+				DE3723722908CBB000098DE3 /* SubscribeViewController.swift in Sources */,
 				DE93014528FF7E9000BDC50A /* AppDelegate.swift in Sources */,
 				DE93014728FF7E9000BDC50A /* SceneDelegate.swift in Sources */,
 				DEEA14A9290625B10082BD7C /* RxCocoaExampleViewController.swift in Sources */,

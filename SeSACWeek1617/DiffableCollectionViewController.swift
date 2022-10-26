@@ -7,6 +7,8 @@
 
 import UIKit
 import Kingfisher
+import RxSwift
+import RxCocoa
 
 class DiffableCollectionViewController: UIViewController {
 
@@ -14,48 +16,67 @@ class DiffableCollectionViewController: UIViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     
     var viewModel = DiffableViewModel()
+    let disposeBag = DisposeBag()
     
     // Int: String:
     private var dataSource: UICollectionViewDiffableDataSource<Int, SearchResult>!
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        collectionView.collectionViewLayout = createLayout()
         configureDataSource()
-        collectionView.delegate = self
+        bindData()
         
-        searchBar.delegate = self
+    }
+    
+    func bindData() {
+        viewModel.photoList
+            .withUnretained(self)
+            .subscribe(onNext: { (vc, photo) in
+                var snapshot = NSDiffableDataSourceSnapshot<Int, SearchResult>()
+                snapshot.appendSections([0])
+                snapshot.appendItems(photo.results)
+                vc.dataSource.apply(snapshot)
+            }, onError: { error in
+                print("=== error: \(error)")
+            }, onCompleted: {
+                print("completed")
+            }, onDisposed: {
+                print("disposed")
+            })
+            .disposed(by: disposeBag)
+//            .bind { photo in
+//            var snapshot = NSDiffableDataSourceSnapshot<Int, SearchResult>()
+//            snapshot.appendSections([0])
+//            snapshot.appendItems(photo.results)
+//            self.dataSource.apply(snapshot)
+//        }
         
-        viewModel.photoList.bind { photo in
-            var snapshot = NSDiffableDataSourceSnapshot<Int, SearchResult>()
-            snapshot.appendSections([0])
-            snapshot.appendItems(photo.results)
-            self.dataSource.apply(snapshot)
-        }
+        searchBar.rx.text.orEmpty
+            .debounce(.seconds(1), scheduler: MainScheduler.instance)
+            .distinctUntilChanged()
+            .withUnretained(self)
+            .subscribe { (vc, value) in
+                vc.viewModel.requestSearchPhoto(query: value)
+            }
+            .disposed(by: disposeBag)
     }
 
 }
 
-extension DiffableCollectionViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        guard let item = dataSource.itemIdentifier(for: indexPath) else { return }
-        
-//        let alert = UIAlertController(title: item, message: "click", preferredStyle: .alert)
-//        let ok = UIAlertAction(title: "ok", style: .cancel)
-//        alert.addAction(ok)
-//        present(alert, animated: true)
-    }
-}
-
-extension DiffableCollectionViewController: UISearchBarDelegate {
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        viewModel.requestSearchPhoto(query: searchBar.text!)
-    }
-}
+//extension DiffableCollectionViewController: UISearchBarDelegate {
+//    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+//        viewModel.requestSearchPhoto(query: searchBar.text!)
+//    }
+//}
 
 extension DiffableCollectionViewController {
+    
+    private func configureHierarchy() {
+        collectionView.collectionViewLayout = createLayout()
+//        searchBar.delegate = self
+    }
+    
     private func createLayout() -> UICollectionViewLayout {
         let config = UICollectionLayoutListConfiguration(appearance: .insetGrouped)
         let layout = UICollectionViewCompositionalLayout.list(using: config)
@@ -75,10 +96,8 @@ extension DiffableCollectionViewController {
                 DispatchQueue.main.async {
                     content.image = UIImage(data: data!)
                     cell.contentConfiguration = content
-                }
-                
+                }   
             }
-            
             
             var background = UIBackgroundConfiguration.listPlainCell()
             background.strokeWidth = 2

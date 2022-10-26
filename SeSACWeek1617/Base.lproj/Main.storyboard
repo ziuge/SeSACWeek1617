@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Vb6-in-ocK">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="W3o-0x-BEy">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
@@ -9,20 +9,52 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
+        <!--Subscribe View Controller-->
+        <scene sceneID="GX1-lT-re1">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="SeSACWeek1617" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                <viewController id="W3o-0x-BEy" customClass="SubscribeViewController" customModule="SeSACWeek1617" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="XpT-sC-DfS">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Fo-qv-psU">
+                                <rect key="frame" x="40" y="67" width="310" height="50"/>
+                                <color key="backgroundColor" systemColor="systemIndigoColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="EHb-ws-eyr"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VaW-4m-BzL">
+                                <rect key="frame" x="40" y="137" width="310" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="h6B-Tp-XqT"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="uvV-vQ-zKu"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="2Fo-qv-psU" firstAttribute="top" secondItem="uvV-vQ-zKu" secondAttribute="top" constant="20" id="Ced-cN-n29"/>
+                            <constraint firstItem="uvV-vQ-zKu" firstAttribute="trailing" secondItem="VaW-4m-BzL" secondAttribute="trailing" constant="40" id="Fam-mm-3ta"/>
+                            <constraint firstItem="uvV-vQ-zKu" firstAttribute="trailing" secondItem="2Fo-qv-psU" secondAttribute="trailing" constant="40" id="fhF-OC-tbl"/>
+                            <constraint firstItem="VaW-4m-BzL" firstAttribute="leading" secondItem="uvV-vQ-zKu" secondAttribute="leading" constant="40" id="hu1-Up-28l"/>
+                            <constraint firstItem="2Fo-qv-psU" firstAttribute="leading" secondItem="uvV-vQ-zKu" secondAttribute="leading" constant="40" id="n7i-Ki-8C3"/>
+                            <constraint firstItem="VaW-4m-BzL" firstAttribute="top" secondItem="2Fo-qv-psU" secondAttribute="bottom" constant="20" id="yIt-mh-tZe"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="button" destination="2Fo-qv-psU" id="yFD-9U-78Y"/>
+                        <outlet property="label" destination="VaW-4m-BzL" id="0FY-A5-0rB"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="p0B-Fg-rbG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="131" y="-28"/>
+            <point key="canvasLocation" x="227.69230769230768" y="-28.436018957345969"/>
         </scene>
         <!--Diffable Collection View Controller-->
         <scene sceneID="BGa-Yj-S9l">
@@ -58,9 +90,6 @@
                                     <constraint firstAttribute="height" constant="44" id="TkZ-CR-1Wv"/>
                                 </constraints>
                                 <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <outlet property="delegate" destination="D77-e8-CiG" id="mD9-zB-UTv"/>
-                                </connections>
                             </searchBar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="JxN-Qz-iaj"/>
@@ -352,6 +381,9 @@
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemIndigoColor">
+            <color red="0.34509803921568627" green="0.33725490196078434" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
