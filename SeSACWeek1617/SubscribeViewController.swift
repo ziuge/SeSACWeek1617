@@ -12,8 +12,8 @@ import RxCocoa
 class SubscribeViewController: UIViewController {
 
     @IBOutlet weak var button: UIButton!
-    
     @IBOutlet weak var label: UILabel!
+    
     let disposeBag = DisposeBag()
     
     override func viewDidLoad() {

@@ -75,6 +75,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DE3723732908FFCF00098DE3 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				DE9178AC2900EDEB006CC5AE /* APIService.swift */,
+				DE9178AE2900EE37006CC5AE /* APIKey.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		DE3723742908FFDC00098DE3 /* Unsplash */ = {
+			isa = PBXGroup;
+			children = (
+				DE93015C28FF906800BDC50A /* DiffableCollectionViewController.swift */,
+				DE9178AA2900ED69006CC5AE /* DiffableViewModel.swift */,
+				DE9178B02900EF74006CC5AE /* SearchPhoto.swift */,
+			);
+			path = Unsplash;
+			sourceTree = "<group>";
+		};
 		DE9178A12900CD7C006CC5AE /* MVVMSample */ = {
 			isa = PBXGroup;
 			children = (
@@ -114,14 +133,11 @@
 				DE93015A28FF7F3700BDC50A /* SimpleTableViewController.swift */,
 				DE93014A28FF7E9000BDC50A /* Main.storyboard */,
 				DE3723712908CBB000098DE3 /* SubscribeViewController.swift */,
-				DE93015C28FF906800BDC50A /* DiffableCollectionViewController.swift */,
-				DE9178AA2900ED69006CC5AE /* DiffableViewModel.swift */,
-				DE9178AC2900EDEB006CC5AE /* APIService.swift */,
-				DE9178AE2900EE37006CC5AE /* APIKey.swift */,
+				DE3723742908FFDC00098DE3 /* Unsplash */,
+				DE3723732908FFCF00098DE3 /* API */,
 				DE93014D28FF7E9200BDC50A /* Assets.xcassets */,
 				DE93014F28FF7E9200BDC50A /* LaunchScreen.storyboard */,
 				DE93015228FF7E9200BDC50A /* Info.plist */,
-				DE9178B02900EF74006CC5AE /* SearchPhoto.swift */,
 			);
 			path = SeSACWeek1617;
 			sourceTree = "<group>";
