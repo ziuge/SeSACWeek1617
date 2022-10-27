@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		DE3723722908CBB000098DE3 /* SubscribeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3723712908CBB000098DE3 /* SubscribeViewController.swift */; };
+		DE8267B2290A07AC00E53F72 /* ValidationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8267B1290A07AC00E53F72 /* ValidationViewController.swift */; };
+		DE8267B4290A22BF00E53F72 /* ValidationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8267B3290A22BF00E53F72 /* ValidationViewModel.swift */; };
 		DE9178A32900CF83006CC5AE /* CObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9178A22900CF83006CC5AE /* CObservable.swift */; };
 		DE9178A52900D13A006CC5AE /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9178A42900D13A006CC5AE /* NewsViewController.swift */; };
 		DE9178A72900D249006CC5AE /* NewsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9178A62900D249006CC5AE /* NewsViewModel.swift */; };
@@ -36,6 +38,8 @@
 
 /* Begin PBXFileReference section */
 		DE3723712908CBB000098DE3 /* SubscribeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribeViewController.swift; sourceTree = "<group>"; };
+		DE8267B1290A07AC00E53F72 /* ValidationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationViewController.swift; sourceTree = "<group>"; };
+		DE8267B3290A22BF00E53F72 /* ValidationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationViewModel.swift; sourceTree = "<group>"; };
 		DE9178A22900CF83006CC5AE /* CObservable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CObservable.swift; sourceTree = "<group>"; };
 		DE9178A42900D13A006CC5AE /* NewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViewController.swift; sourceTree = "<group>"; };
 		DE9178A62900D249006CC5AE /* NewsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViewModel.swift; sourceTree = "<group>"; };
@@ -148,6 +152,8 @@
 				DEEA14A8290625B10082BD7C /* RxCocoaExampleViewController.swift */,
 				DEB604C929077A67006573F4 /* SubjectViewController.swift */,
 				DEB604CB290788B2006573F4 /* SubjectViewModel.swift */,
+				DE8267B1290A07AC00E53F72 /* ValidationViewController.swift */,
+				DE8267B3290A22BF00E53F72 /* ValidationViewModel.swift */,
 			);
 			path = Rx;
 			sourceTree = "<group>";
@@ -237,6 +243,7 @@
 				DE93015928FF7EAE00BDC50A /* SimpleCollectionViewController.swift in Sources */,
 				DE9178A72900D249006CC5AE /* NewsViewModel.swift in Sources */,
 				DE9178AB2900ED69006CC5AE /* DiffableViewModel.swift in Sources */,
+				DE8267B4290A22BF00E53F72 /* ValidationViewModel.swift in Sources */,
 				DE9178A32900CF83006CC5AE /* CObservable.swift in Sources */,
 				DE93014928FF7E9000BDC50A /* ViewController.swift in Sources */,
 				DEB604CA29077A67006573F4 /* SubjectViewController.swift in Sources */,
@@ -244,6 +251,7 @@
 				DE9178B12900EF74006CC5AE /* SearchPhoto.swift in Sources */,
 				DE93015D28FF906800BDC50A /* DiffableCollectionViewController.swift in Sources */,
 				DE3723722908CBB000098DE3 /* SubscribeViewController.swift in Sources */,
+				DE8267B2290A07AC00E53F72 /* ValidationViewController.swift in Sources */,
 				DE93014528FF7E9000BDC50A /* AppDelegate.swift in Sources */,
 				DE93014728FF7E9000BDC50A /* SceneDelegate.swift in Sources */,
 				DEEA14A9290625B10082BD7C /* RxCocoaExampleViewController.swift in Sources */,
