@@ -15,12 +15,14 @@ class DiffableCollectionViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var searchBar: UISearchBar!
     
+    var list = ["아이폰", "아이패드", "에어팟"]
+    private var cellRegistration: UICollectionView.CellRegistration<UICollectionViewListCell, String>! // <어떤 셀을 쓸 것인지, 어떤 타입이 들어갈 것인지>
+    
     var viewModel = DiffableViewModel()
     let disposeBag = DisposeBag()
     
-    // Int: String:
-    private var dataSource: UICollectionViewDiffableDataSource<Int, SearchResult>!
-
+    private var dataSource: UICollectionViewDiffableDataSource<Int, SearchResult>! // <섹션, 모델에 대한 타입>
+ 
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -84,7 +86,7 @@ extension DiffableCollectionViewController {
     }
     
     private func configureDataSource() {
-        let cellRegisteration = UICollectionView.CellRegistration<UICollectionViewListCell, SearchResult>(handler: { cell, indexPath, itemIdentifier in
+        let cellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, SearchResult>(handler: { cell, indexPath, itemIdentifier in
             var content = UIListContentConfiguration.valueCell()
             content.text = "\(itemIdentifier.likes)"
             
@@ -106,9 +108,9 @@ extension DiffableCollectionViewController {
         })
         
         // collectionView.dataSource = self
-        // numberOfItemsInSection, cellForItemAt
+        // numberOfItemsInSection, cellForItemAt 대체
         dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
-            let cell = collectionView.dequeueConfiguredReusableCell(using: cellRegisteration, for: indexPath, item: itemIdentifier)
+            let cell = collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: itemIdentifier)
             return cell
         })
         

@@ -40,11 +40,15 @@ class SimpleCollectionViewController: UICollectionViewController {
         
 //        collectionView.collectionViewLayout = createLayout()
 //
-//        print(hello)
-//        hello = welcome // welcome vs welcome()
-//        print(hello)
-//        hello()
+//        print(hello) // nil
+//        hello = welcome // welcome(함수타입 그 자체) vs welcome()(함수 안을 실행)
+//        hello = { // 미리 코드를 담아놓고, 실행은 나중에. 셀이 생성될 때 실행된다.
+//            print("hello")
+//        }
+//        print(hello) // Function
+//        hello() // hello
 //
+        // 미리 코드를 담아놓고, 실행은 나중에. 셀이 생성될 때 실행된다.
 //        cellRegistration = UICollectionView.CellRegistration { cell, indexPath, itemIdentifier in
 //
 //            var content = UIListContentConfiguration.valueCell()
@@ -79,14 +83,8 @@ class SimpleCollectionViewController: UICollectionViewController {
 //        snapshot.appendItems(list)
 //        dataSource.apply(snapshot)
         
-        // 14+ 컬렉션뷰를 테이블뷰 스타일처럼 사용 가능 (List Configuration)
-        var configuration = UICollectionLayoutListConfiguration(appearance: .insetGrouped)
-        configuration.showsSeparators = false
-        configuration.backgroundColor = .brown
         
-        let layout = UICollectionViewCompositionalLayout.list(using: configuration)
-        
-        collectionView.collectionViewLayout = layout
+        collectionView.collectionViewLayout = createLayout()
         
         cellRegistration = UICollectionView.CellRegistration { cell, indexPath, itemIdentifier in // itemIdentifier - 셀 정보
 //            var content = cell.defaultContentConfiguration()
@@ -101,6 +99,13 @@ class SimpleCollectionViewController: UICollectionViewController {
             content.imageProperties.tintColor = .yellow
             
             cell.contentConfiguration = content
+            
+            var backgroundConfig = UIBackgroundConfiguration.listPlainCell()
+            backgroundConfig.backgroundColor = .lightGray
+            backgroundConfig.cornerRadius = 10
+            backgroundConfig.strokeColor = .blue
+            backgroundConfig.strokeWidth = 2
+            cell.backgroundConfiguration = backgroundConfig
         }
     }
     
@@ -120,8 +125,15 @@ class SimpleCollectionViewController: UICollectionViewController {
 
 extension SimpleCollectionViewController {
     private func createLayout() -> UICollectionViewLayout {
-        let config = UICollectionLayoutListConfiguration(appearance: .insetGrouped)
-        let layout = UICollectionViewCompositionalLayout.list(using: config)
+//        let config = UICollectionLayoutListConfiguration(appearance: .insetGrouped)
+//        let layout = UICollectionViewCompositionalLayout.list(using: config)
+        // 14+ 컬렉션뷰를 테이블뷰 스타일처럼 사용 가능 (List Configuration)
+        // 컬렉션뷰 스타일 코드 (컬렉션뷰 셀과는 관계 x)
+        var configuration = UICollectionLayoutListConfiguration(appearance: .insetGrouped)
+        configuration.showsSeparators = false
+        configuration.backgroundColor = .brown
+        
+        let layout = UICollectionViewCompositionalLayout.list(using: configuration)
         return layout
     }
 }
