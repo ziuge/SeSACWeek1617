@@ -30,35 +30,45 @@ class SubjectViewController: UIViewController {
         
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "ContactCell")
         
-        viewModel.list
-            .bind(to: tableView.rx.items(cellIdentifier: "ContactCell", cellType: UITableViewCell.self)) { (row, element, cell) in
+        let input = SubjectViewModel.Input(addTap: addButton.rx.tap, resetTap: resetButton.rx.tap, newTap: newButton.rx.tap, searchText: searchBar.rx.text)
+        let output = viewModel.transform(input: input)
+        
+        
+//        viewModel.list // VM -> VC (Output)
+//            .asDriver(onErrorJustReturn: [])
+        output.list
+            .drive(tableView.rx.items(cellIdentifier: "ContactCell", cellType: UITableViewCell.self)) { (row, element, cell) in
                 cell.textLabel?.text = "\(element.name): \(element.age)세 (\(element.number))"
             }
             .disposed(by: disposeBag)
 
-        addButton.rx.tap
+//        addButton.rx.tap
+        output.addTap
             .withUnretained(self)
             .subscribe { (vc, _) in
                 vc.viewModel.fetchData()
             }
             .disposed(by: disposeBag)
         
-        resetButton.rx.tap
+//        resetButton.rx.tap
+        output.resetTap
             .withUnretained(self)
             .subscribe { (vc, _) in
                 vc.viewModel.resetData()
             }
             .disposed(by: disposeBag)
         
-        newButton.rx.tap
+//        newButton.rx.tap // VC -> VM (Input)
+        output.newTap
             .withUnretained(self)
             .subscribe { (vc, _) in
                 vc.viewModel.newData()
             }
             .disposed(by: disposeBag)
             
-        searchBar.rx.text.orEmpty
-            .distinctUntilChanged() // 같은 값을 받지 않음
+//        searchBar.rx.text.orEmpty // VC -> VM (Input)
+//            .distinctUntilChanged() // 같은 값을 받지 않음
+        output.searchText
             .withUnretained(self)
             .debounce(RxTimeInterval.seconds(1), scheduler: MainScheduler.instance) // wait
             .subscribe { (vc, value) in

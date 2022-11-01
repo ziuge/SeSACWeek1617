@@ -27,14 +27,41 @@ class ValidationViewController: UIViewController {
 
     func bind() {
         
-        viewModel.validText
+        // After
+        let input = ValidationViewModel.Input(text: nameTextField.rx.text, tap: stepButton.rx.tap) // 뷰모델로 데이터를 보내줌
+        let output = viewModel.transform(input: input)
+        
+        output.text
+            .drive(validationLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        output.validation
+            .bind(to: stepButton.rx.isEnabled, validationLabel.rx.isHidden)
+            .disposed(by: disposeBag)
+        
+        output.validation
+            .withUnretained(self)
+            .bind { (vc, value) in
+                let color: UIColor = value ? .systemPink : .lightGray
+                vc.stepButton.backgroundColor = color
+            }
+            .disposed(by: disposeBag)
+        
+        output.tap
+            .bind { _ in
+                print("SHOW ALERT")
+            }
+            .disposed(by: disposeBag)
+
+        // Before
+        viewModel.validText // Output
             .asDriver() // 여기서 asDriver로 변환 과정이 필요함!
             .drive(validationLabel.rx.text)
             .disposed(by: disposeBag)
         
-        let validation = nameTextField.rx.text // String? (Optional)
-            .orEmpty // String
-            .map { $0.count >= 8 } // Bool
+        let validation = nameTextField.rx.text // String? (Optional) // Input
+            .orEmpty // String? -> String
+            .map { $0.count >= 8 } // String -> Bool
             .share() // Subject, Relay
 
         validation
@@ -49,7 +76,7 @@ class ValidationViewController: UIViewController {
             }
             .disposed(by: disposeBag)
         
-        stepButton.rx.tap
+        stepButton.rx.tap // Input
             .bind { _ in
                 print("SHOW ALERT")
             }
